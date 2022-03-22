@@ -6,7 +6,7 @@ We were developing a mobile ordering web app to bring traffic and lighten up the
 
 ## Authors
 
-* **Trevor Cardoza** - *Initial work, backend, server deployment* - [Rastatrevftw](https://github.com/Rastatrevftw1538)
+* **Trevor Cardoza** - *Backend Flask, SMS API, MongoDB Managment and Querying, AWS server deployment* - [Rastatrevftw](https://github.com/Rastatrevftw1538)
 * **Matthew Zhang** - *Insert work done* - [mtz99](https://github.com/mtz99)
 * **Darren Jeong** - *Insert work done* - [darrenj321](https://github.com/darrenj321)
 * **Regina Cuevas** - *Insert work done* - [regina-cuevas](https://github.com/regina-cuevas)
