@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Bootstrap CSS -->
+			<link rel="stylesheet" href="static/css/bootstrap.css">
+			<link rel="stylesheet" href="static/vendors/linericon/style.css">
+			<link rel="stylesheet" href="static/css/font-awesome.min.css">
+			<link rel="stylesheet" href="static/css/magnific-popup.css">
+			<link rel="stylesheet" href="static/vendors/owl-carousel/owl.carousel.min.css">
+			<link rel="stylesheet" href="static/vendors/lightbox/simpleLightbox.css">
+			<link rel="stylesheet" href="static/vendors/nice-select/css/nice-select.css">
+			<link rel="stylesheet" href="static/vendors/jquery-ui/jquery-ui.css">
+			<link rel="stylesheet" href="static/vendors/animate-css/animate.css">
+			<!-- main css -->
+		<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	</head>
+
+	<!--Anything in Brackets do not touch please-->
+	<!--================ Start Header Menu Area =================-->
+	<div class="menu-trigger">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<header class="fixed-menu">
+		<span class="menu-close"><i class="fa fa-times"></i></span>
+		<div class="menu-header">
+			<div class="logo d-flex justify-content-center">
+		<img width="70" height="70" src="static/img/SaintMarysLogo.jpeg" alt="">
+	  </div>
+	  <div>
+		<h4>{{user['name']}}</h4>
+	  </div>
+		</div>
+		<div class="nav-wraper">
+			<div class="navbar">
+				<ul class="navbar-nav">
+		  <li class="nav-item"><a class="nav-link" href="{{url_for('CafeMenu')}}"><img src="img/header/nav-icon1.png" alt="">Home</a></li>
+		  <li class="nav-item"><a class="nav-link active"><img src="img/header/nav-icon2.png" alt="">Cart</a></li>
+		  <li class="nav-item"><a class="nav-link" href="{{url_for('Logout')}}"><img src="img/header/nav-icon3.png" alt=""> Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<!--================ End Header Menu Area =================-->  
+
+	<h1 align="center">Order Placed!</h1>
+	<h2 align = "center">{{user}}</h2>
+	<p>{{txtSup}}</p>
+	<h3> You are order number: {{orderNum}}</h3>
+	<button align = "center"><a method="POST" href={{url_for('CafeMenu')}}>Go Back</a></button>
+	<!-- NOT Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/popper.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+		<script src="static/js/stellar.js"></script>
+		<script src="static/js/jquery.magnific-popup.min.js"></script>
+		<script src="static/vendors/lightbox/simpleLightbox.min.js"></script>
+		<script src="static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+		<script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
+		<script src="static/vendors/jquery-ui/jquery-ui.js"></script>
+		<script src="static/js/jquery.ajaxchimp.min.js"></script>
+		<script src="static/vendors/counter-up/jquery.waypoints.min.js"></script>
+		<script src="static/vendors/counter-up/jquery.counterup.js"></script>
+		<script src="static/js/mail-script.js"></script>
+		<!--gmaps Js-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+		<script src="static/js/gmaps.min.js"></script>
+		<script src="static/js/theme.js"></script>
+</html>

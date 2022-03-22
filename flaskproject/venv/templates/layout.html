@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cafe Louis Online Order</title>
+		<style type="text/css">
+		.container .logo {
+    font-family: Helvetica Neue, serif, sans-serif, Arial;
+}
+        </style>
+	<strong
+			><link
+				rel="stylesheet"
+				href="{{ url_for('static', filename='css/main.css') }}"
+		/></strong>
+	</head>
+	<body>
+		<header>
+			<div class="container"><img src="static/img/GP Lockup white background.png" width="282" height="76" alt=""/></div>
+		</header>
+
+		<div class="container">
+			{% block content %} {% endblock %}
+		</div>
+	</body>
+</html>

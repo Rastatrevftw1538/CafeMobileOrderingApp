@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+<html>
+  <div class="wrapper">
+    <meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+    />
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+      <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="static/css/bootstrap.css">
+	    <link rel="stylesheet" href="static/vendors/linericon/style.css">
+	    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="static/css/magnific-popup.css">
+	    <link rel="stylesheet" href="static/vendors/owl-carousel/owl.carousel.min.css">
+	    <link rel="stylesheet" href="static/vendors/lightbox/simpleLightbox.css">
+	    <link rel="stylesheet" href="static/vendors/nice-select/css/nice-select.css">
+	    <link rel="stylesheet" href="static/vendors/jquery-ui/jquery-ui.css">
+	    <link rel="stylesheet" href="static/vendors/animate-css/animate.css">
+	    <!-- main css -->
+      <link rel="stylesheet" href="static/css/style.css">
+    </head>
+
+    <!--Anything in Brackets do not touch please-->
+    <body align = center>
+      <!--================ Start Header Menu Area =================-->
+	    <div class="menu-trigger">
+		    <span></span>
+		    <span></span>
+		    <span></span>
+	    </div>
+	    <header class="fixed-menu">
+		    <span class="menu-close"><i class="fa fa-times"></i></span>
+		    <div class="menu-header">
+			    <div class="logo d-flex justify-content-center">
+            <a href="home.html"><img width="70" height="70" src="static/img/SaintMarysLogo.jpeg" alt="" class="rounded img-fluid"></a>
+          </div>
+          <div>
+            <h4>{{user['name']}}</h4>
+          </div>
+		    </div>
+		    <div class="nav-wraper">
+			    <div class="navbar">
+				    <ul class="navbar-nav">
+              <li class="nav-item"><img src="/static/img/nav-icon1.png" alt="">Home</li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('Checkout')}}"><img src="img/header/nav-icon2.png" alt="">Cart: {{user['myCart']['Items']|length}}</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('Logout')}}"><img src="img/header/nav-icon3.png" alt=""> Logout</a></li>
+				    </ul>
+			    </div>
+		    </div>
+	    </header>
+	    <!--================ End Header Menu Area =================-->  
+
+
+        <div class="align-items-center justify-content-center">
+          <div class="banner_content">
+            <div class="row d-flex align-items-center">
+              <div class="col-lg-7 col-md-12">
+                <h2>Welcome to the Cafe Louis Mobile Order </h2>
+                <h3>Let's place an order</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
+      <table align = "center" class = "table">
+        <tr>
+          <th width="20%">Item:</th>
+          <th width="80%">Description:</th>
+        </tr>
+          <tr>
+            <form action="{{url_for('Selection')}}" method="POST">
+              {% for i in range(0,items|length)%}
+              <td><input height="400" width="800" align = "left" type="submit" id={{items[i]}} name={{items[i]}} value={{items[i]}}>
+              </td>
+            <td>{{descs[i]}}</td>
+          </tr>
+          {% endfor %}
+          </form>
+      </table><br><br>
+    
+      <!-- NOT Optional JavaScript -->
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <script src="static/js/jquery-3.2.1.min.js"></script>
+	    <script src="static/js/popper.js"></script>
+	    <script src="static/js/bootstrap.min.js"></script>
+	    <script src="static/js/stellar.js"></script>
+	    <script src="static/js/jquery.magnific-popup.min.js"></script>
+	    <script src="static/vendors/lightbox/simpleLightbox.min.js"></script>
+	    <script src="static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	    <script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
+	    <script src="static/vendors/jquery-ui/jquery-ui.js"></script>
+	    <script src="static/js/jquery.ajaxchimp.min.js"></script>
+	    <script src="static/vendors/counter-up/jquery.waypoints.min.js"></script>
+	    <script src="static/vendors/counter-up/jquery.counterup.js"></script>
+	    <script src="static/js/mail-script.js"></script>
+	    <!--gmaps Js-->
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	    <script src="static/js/gmaps.min.js"></script>
+	    <script src="static/js/theme.js"></script>
+    </body>
+  </div>
+{% endblock %}
+</html>

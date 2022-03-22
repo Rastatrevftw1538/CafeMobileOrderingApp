@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+		/>
+		<title>Cafe Louis</title>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="398x101"
+			href="static/img/Cafe%20Louis%20Logo.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="398x101"
+			href="static/img/Cafe%20Louis%20Logo.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="398x101"
+			href="static/img/Cafe%20Louis%20Logo.png"
+		/>
+		<link
+			rel="stylesheet"
+			href="static/bootstrap/css/bootstrap.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Cookie"
+		/>
+		<link rel="stylesheet" href="static/fonts/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="static/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="static/fonts/ionicons.min.css" />
+		<link
+			rel="stylesheet"
+			href="static/fonts/fontawesome5-overrides.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="static/css/Animated-Pretty-Product-List-v12.css"
+		/>
+		<link rel="stylesheet" href="static/css/Button-Hover-Animate.css" />
+		<link rel="stylesheet" href="static/css/gradient-navbar-1.css" />
+		<link rel="stylesheet" href="static/css/gradient-navbar.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+		/>
+		<link rel="stylesheet" href="static/css/Login-Form-Dark.css" />
+		<link
+			rel="stylesheet"
+			href="static/css/Navbar---Logo-Left---Phone-Logo-Left.css"
+		/>
+		<link rel="stylesheet" href="static/css/Navbar-Apple.css" />
+		<link rel="stylesheet" href="static/css/Pretty-Footer.css" />
+		<link
+			rel="stylesheet"
+			href="static/css/Pretty-Registration-Form.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="static/css/Registration-Form-with-Photo.css"
+		/>
+		<link rel="stylesheet" href="static/css/styles.css" />
+	</head>
+
+	<body>
+		<nav
+			class="navbar navbar-dark navbar-expand-md"
+			id="app-navbar-1"
+			style="
+				color: rgb(244, 43, 8);
+				background-image: url('static/img/793915-red-color-wallpaper-2560x1600-mobile.jpg');
+			"
+		>
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"></a
+				><img
+					src="static/img/Cafe%20Louis%20Logo.png"
+					style="width: 162px; margin: 0px;"
+				/><button
+					data-toggle="collapse"
+					class="navbar-toggler"
+					data-target="#navcol-2"
+				>
+					<span class="sr-only">Toggle navigation</span
+					><span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navcol-2">
+					<a
+						href="#"
+						style="
+							font-size: 28;
+							padding: 8px;
+							color: #ffffff;
+						"
+					></a>
+					<ul class="nav navbar-nav">
+						<li class="nav-item" role="presentation"></li>
+						<li class="nav-item" role="presentation"></li>
+					</ul>
+					<a
+						href="{{url_for('CheckoutCafe')}}"
+						style="
+							font-size: 16px;
+							color: rgb(254, 254, 254);
+						"
+						><i
+							class="fas fa-shopping-cart"
+							style="
+								width: 14px;
+								height: 13px;
+								font-size: 14px;
+							"
+						></i
+						>&nbsp;Cart: {{user['myCart']['Items']|length}}&nbsp;&nbsp;</a
+					>
+					<a
+						href={{url_for("Rewards")}}
+						style="
+							font-size: 16px;
+							color: rgb(254, 254, 254);
+						"
+						><i
+							class="fa fa-star-o"
+							style="
+								width: 14px;
+								height: 13px;
+								font-size: 14px;
+							"
+						></i
+						>&nbsp;Rewards&nbsp;&nbsp;</a
+					>
+					<a
+						href="{{url_for('Logout')}}"
+						style="
+							font-size: 16px;
+							color: rgb(254, 254, 254);
+						"
+						><i
+							class="fas fa-sign-out-alt"
+							style="
+								width: 14px;
+								height: 14px;
+								font-size: 16px;
+							"
+						></i
+						>&nbsp;Log Out</a
+					>
+					<ul class="nav navbar-nav ml-auto">
+						<li class="nav-item" role="presentation"></li>
+						<li class="nav-item" role="presentation"></li>
+						<li class="nav-item" role="presentation"></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="jumbotron hero-technology" style="height: 332px;">
+			<h1 class="hero-title" style="margin: 0px; padding: 0px;">
+				Cafe Hours:
+			</h1>
+			<p class="hero-subtitle" style="font-size: 20px;">
+				Regular Hours:
+			</p>
+			<p style="font-size: 20px;">Monday-Friday:</p>
+			<p style="font-size: 20px;">7:30AM-9:00PM</p>
+			<p style="font-size: 20px;">Saturday- Sunday:</p>
+			<p></p>
+			<p style="font-size: 20px;">7:30AM-2:30PM</p>
+		</div>
+		<div></div>
+		<div class="container">
+			<form action="{{url_for('SelectionCafe')}}" method="POST">
+			<div class="row product-list dev">
+				{% for i in range(0,items|length)%}
+					<div
+						class="col-sm-6 col-md-4 product-item animation-element slide-top-left"
+					>
+						<div class="product-container">
+							<div class="row">
+								<div class="col-md-12">
+									<a class="product-image"
+										><img
+											src="static/img/{{items[i]}}.jpg"
+									/></a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-8">
+									<h2><a>{{items[i] | replace("-"," ")}}</a></h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<p class="product-description">
+										{{descs[i]}}
+									</p>
+									<div class="row">
+										<!-- <input height="400" width="800" align = "left"  > -->
+										<div class="col-6">
+											<button
+												class="btn btn-light"
+												type="submit"
+												id="{{items[i]}}"
+												name="{{items[i]}}"
+												value="{{items[i]}}"
+											>Buy Now!</button>
+										</div>
+										<div class="col-6">
+											<p class="product-price">
+												Starting at ${{startPrice[i]}}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+			</form>
+			</div>
+		</div>
+				<div class="col-md-12">
+					<footer class="bg-dark">
+						<div class="row">
+							<div
+								class="col-sm-6 col-md-4 footer-navigation"
+							>
+								<h3><a href="#">Gael Pantry</a></h3>
+								<p class="links">
+									<a href="#">Home</a
+									><strong> ·</strong
+									><a href="#">Menu</a
+									><strong> ·&nbsp;</strong
+									><a href="#">Contact</a>
+								</p>
+							</div>
+							<div
+								class="col-sm-6 col-md-4 footer-contacts"
+							>
+								<div>
+									<span
+										class="fa fa-map-marker footer-contacts-icon"
+									>
+									</span>
+									<p>
+										<span class="new-line-span"
+											>1928 St.Mary's Rd</span
+										>Moraga,CA,94575
+									</p>
+								</div>
+								<div>
+									<i
+										class="fa fa-phone footer-contacts-icon"
+									></i>
+									<p
+										class="footer-center-info email text-left"
+									>
+										(925) 631-4366
+									</p>
+								</div>
+								<div>
+									<i
+										class="fa fa-envelope footer-contacts-icon"
+									></i>
+									<p>
+										<a href="#" target="_blank"
+											>cao6@stmarys-ca.edu</a
+										>
+									</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-md-4 footer-about">
+								
+							
+								<div class="social-links social-icons">
+									<a href="#"
+										><i
+											class="fa fa-facebook"
+										></i></a
+									><a href="#"
+										><i
+											class="fa fa-twitter"
+										></i></a
+									><a href="#"
+										><i
+											class="fab fa-instagram"
+										></i></a
+									><a href="#"
+										><i class="fa fa-github"></i
+									></a>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</>
+			</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/js/bs-init.js"></script>
+		<script src="assets/js/Animated-Pretty-Product-List-v12.js"></script>
+	</body>
+</html>

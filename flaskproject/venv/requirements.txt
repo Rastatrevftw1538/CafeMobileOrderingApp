@@ -1,0 +1,9 @@
+Flask>=1.1.2
+flask_admin>=1.5.6
+pymongo==3.10.1
+flask_mail==0.9.1
+dnspython==1.16.0
+DateTime==4.3
+pytz>=2019.3
+numpy>=1.16.5
+venmo>=0.12.0
