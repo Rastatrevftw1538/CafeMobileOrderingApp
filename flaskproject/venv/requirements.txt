@@ -7,3 +7,4 @@ DateTime==4.3
 pytz>=2019.3
 numpy>=1.16.5
 venmo>=0.12.0
+bcrypt

@@ -9,7 +9,7 @@ carriers = {
 	'sprint':   '@page.nextel.com'
 }
 InfoDict = {}
-with open('SecretKeys.txt','r') as Info:
+with open('flaskproject/venv/SecretKeys.txt','r') as Info:
      for line in Info:
           (key,value) = line.split()
           InfoDict[str(key)] = value

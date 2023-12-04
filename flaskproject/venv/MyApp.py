@@ -2,7 +2,7 @@ from flask import *
 import SMSReminders as SMS
 
 from werkzeug.exceptions import HTTPException
-from werkzeug.security import check_password_hash, generate_password_hash
+import bcrypt
 import os
 import time
 from markupsafe import escape
@@ -19,7 +19,7 @@ import venmo
 
 """DO NOT TOUCH!!!"""
 InfoDict = {}
-with open('SecretKeys.txt','r') as Info:
+with open('flaskproject/venv/SecretKeys.txt','r') as Info:
     for line in Info:
         (key,value) = line.split()
         InfoDict[str(key)] = value
@@ -52,7 +52,8 @@ app = Flask(__name__)
 
 #mail = Mail(app)
 
-app.secret_key = "Y\x8c]\xb1^\xb6\xc7\x9d\xf4\xbd\xa3\x8a\xa2:#\xc6\xe8\x95u8<'\xe9p"
+#Putting Season Key securely in the SecretKeys.txt file
+app.secret_key = InfoDict["SeasonKey"]
 app._static_folder = "templates/static"
 
 
@@ -65,74 +66,7 @@ carriers = {
     'Verizon':  '@vzwpix.com',
     'Sprint':   '@page.nextel.com'
 }
-'''
-@app.before_request
-def rememberMe():
-    username = session.get("username")
-    print(app.config['SESSION_COOKIE_NAME'])
-    print(username)
-    if username != None:
-        app.config['SESSION_COOKIE_NAME'] = username
-'''
-'''app.config['FLASK_ADMIN_SWATCH'] = 'simplex'
 
-
-class MenuItemForm(form.Form):
-    item = fields.StringField('Item Name')
-    desc = fields.StringField('Description')
-    choice = fields.TextAreaField(
-        "Choices", description='Enter in JSON format. Ex. {"Hot-Cocoa": {"Small": 2.95,"Medium": 3.45,"Large": 3.65},"Steamer-with-Syrup": {"Small": 2.25,"Medium": 2.45,"Large": 5.25}}')
-    aval = fields.SelectField("Avalability", choices=[(
-        "Morn", "Morning"), ("Aftr", "Afternoon"), ("AllDay", "All Day")])
-
-
-class OrderForm(form.Form):
-    orderProgress = fields.SelectField("Order Progress", choices=[(
-        "New", "New"), ("In Process", "In Progress"), ("Completed", "Done")])
-
-
-class MenuView(flask_admin.contrib.pymongo.ModelView):
-    column_list = ('item', 'desc', 'choice', 'aval')
-    form = MenuItemForm
-    can_export = True
-
-    def after_model_change(self, form, model, is_created):
-        oldData = form.choice.data
-        madeDict = json.loads(form.choice.data)
-        print(dict(madeDict))
-        form.choice.data = dict(madeDict)
-        print(form.choice.data)
-        mycolmenuAdmin.update_one({"choice": str(oldData)}, {
-                                  "$set": {"choice": dict(madeDict)}})
-
-
-class OrderView(flask_admin.contrib.pymongo.ModelView):
-    can_create = False
-    edit_modal = True
-    form_excluded_columns = ['PhoneNumber', ]
-    column_exclude_list = ['PhoneNumber', ]
-    column_list = ('Que', 'Name', 'smcID', 'Order', 'PhoneNumber',
-                   'TotalPrice', 'payMethod', 'orderProgress')
-    form = OrderForm
-
-    def after_model_change(self, form, model, is_created):
-        if is_created == False:
-            Data = form.orderProgress.data
-            # print(Data)
-            # print(model['PhoneNumber'])
-            if Data == "In Process":
-                SMS.send(
-                    "Your order has be processed and is in progress!\nWe will text you when your order is completed!", model['PhoneNumber'])
-            elif Data == "Completed":
-                SMS.send(
-                    "Your order is complete!!!\nCome down to Cafe Louis to pick up your order!", model['PhoneNumber'])
-
-
-admin = flask_admin.Admin(app, "Cafe Louis Moble Order Admin Page")
-admin.add_view(MenuView(mydbAdmin["Menu"]))
-admin.add_view(OrderView(cafeDBAdmin["Orders"]))
-
-'''
 @app.route("/", methods=["GET", "POST"])
 def start():
     # if 'username' not in session:
@@ -214,73 +148,6 @@ def CafeMenu():
             startPrice=menuStartPrice,
             user=user,
         )
-        '''elif float(hour+(float(minute/100))) >= 11.00:
-                for i in mycolmenu.find({'aval': {'$in': ['AllDay', 'Aftr']}}):
-                    menuItems.append(i['item'])
-                    menuDescs.append(i['desc'])
-                    for price in list(i['choice'].values())[0].values():
-                        menuStartPrice.append(price)
-                        break
-                    tempChoice = []
-                    for x in i['choice']:
-                        tempChoice.append(x)
-                    menuChoice.append(tempChoice)
-                # print(menuStartPrice)
-                return render_template(
-                    "Menu.html",
-                    items=menuItems,
-                    descs=menuDescs,
-                    choice=menuChoice,
-                    startPrice=menuStartPrice,
-                    user=user,
-                )
-        else:
-            return render_template("closed.html", user=user)
-    elif timeThing.now().isoweekday() > 5:
-        if float(hour+(float(minute/100))) >= 7.30 and float(hour+(float(minute/100))) <= 13.00:
-            if float(hour+(float(minute/100))) < 11.00:
-                for i in mycolmenu.find({"aval": {"$in": ["AllDay", "Morn"]}}):
-                    menuItems.append(i["item"])
-                    menuDescs.append(i["desc"])
-                    for price in list(i['choice'].values())[0].values():
-                        menuStartPrice.append(price)
-                        break
-                    tempChoice = []
-                    for x in i["choice"]:
-                        tempChoice.append(x)
-                    menuChoice.append(tempChoice)
-                return render_template(
-                    "Menu.html",
-                    items=menuItems,
-                    descs=menuDescs,
-                    choice=menuChoice,
-                    startPrice=menuStartPrice,
-                    user=user,
-                )
-            elif float(hour+(float(minute/100))) >= 11.00:
-                for i in mycolmenu.find({"aval": {"$in": ["AllDay", "Aftr"]}}):
-                    menuItems.append(i["item"])
-                    menuDescs.append(i["desc"])
-                    for price in list(i['choice'].values())[0].values():
-                        menuStartPrice.append(price)
-                        break
-                    tempChoice = []
-                    for x in i["choice"]:
-                        tempChoice.append(x)
-                    menuChoice.append(tempChoice)
-                return render_template(
-                    "Menu.html",
-                    items=menuItems,
-                    descs=menuDescs,
-                    choice=menuChoice,
-                    startPrice=menuStartPrice,
-                    user=user,
-                )
-        else:
-            return render_template("closed_cafe.html", user=user)
-
-else:
-    '''
         abort(403)
         return render_template("login.html")
 
@@ -332,8 +199,7 @@ def Login():
         if str(request.form["Login"]) == "LoginCafe":
             for u in mycolcust.find({"username": request.form["uname"]}):
                 if str(request.form["uname"]) == u["username"]:
-                    # print(check_password_hash(str(i["hashed_pass"]),str(request.form["psw"])))
-                    if check_password_hash(u["hashed_pass"], str(request.form["psw"])):
+                    if bcrypt.checkpw(str(request.form["psw"]).encode("utf-8"),u["hashed_pass"]):
                         session["username"] = request.form["uname"]
                         session.permanent = True
                         session.modified = True
@@ -347,8 +213,7 @@ def Login():
                 if mycolcust.find_one({"username": request.form["uname"]}):
                     u = mycolcust.find_one({"username": request.form["uname"]})
                     if str(request.form["uname"]) == u["username"]:
-                        # print(check_password_hash(str(i["hashed_pass"]),str(request.form["psw"])))
-                        if check_password_hash(u["hashed_pass"], str(request.form["psw"])):
+                        if bcrypt.checkpw(str(request.form["psw"]).encode("utf-8"),u["hashed_pass"]):
                             session["username"] = request.form["uname"]
                             session.permanent = True
                             session.modified = True
@@ -389,9 +254,8 @@ def SignUp():
             custDict["username"] = str(request.form["uname"].strip())
             custDict["phoneNum"] = str(
                 request.form["PNum"])+'{}'.format(carriers[request.form['PCarrier']])
-            custDict["hashed_pass"] = generate_password_hash(
-                str(request.form["psw"]), "sha256"
-            )
+            custDict["hashed_pass"] = bcrypt.hashpw(
+                str(request.form["psw"]).encode("utf-8"), bcrypt.gensalt())
             custDict['myCart'] = {"TotalPrice": float(0.00), "Items": []}
             custDict['myCartPantry'] = {"TotalPrice": int(0.00), "Items": []}
             custDict['Rewards'] = {"Points": 0, "Free?": False}
